@@ -15,9 +15,33 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    setState(() async {
-      contacts = await contactHelper.getAllContacts();
+    setState(() {
+      contactHelper.getAllContacts().then((resp) {
+        contacts = resp;
+      });
     });
+  }
+
+  Widget _contactsNotFound() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(
+            Icons.error,
+            size: 100,
+            color: Colors.grey[400],
+          ),
+          Text(
+            "Nenhum contato",
+            style: TextStyle(
+                color: Colors.grey[400],
+                fontSize: 25.0,
+                fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
+    );
   }
 
   Widget _contactCard(BuildContext context, int index) {
@@ -82,12 +106,14 @@ class _HomeState extends State<Home> {
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
-      body: ListView.builder(
-          padding: EdgeInsets.all(10.0),
-          itemCount: contacts.length,
-          itemBuilder: (context, index) {
-            return _contactCard(context, index);
-          }),
+      body: contacts.length > 0
+          ? ListView.builder(
+              padding: EdgeInsets.all(10.0),
+              itemCount: contacts.length,
+              itemBuilder: (context, index) {
+                return _contactCard(context, index);
+              })
+          : _contactsNotFound(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Icon(Icons.add),
