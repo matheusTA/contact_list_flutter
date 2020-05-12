@@ -1,4 +1,4 @@
-package br.com.antonino.phone_book_flutter
+package br.com.antonino.contact_list_flutter
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

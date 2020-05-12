@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:phone_book_flutter/src/helpers/contact_helper.dart';
+import 'package:contact_list_flutter/src/helpers/contact_helper.dart';
 
 class ContactScrenn extends StatefulWidget {
   final Contact contact;

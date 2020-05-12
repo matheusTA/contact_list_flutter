@@ -1,4 +1,4 @@
-# phone_book_flutter
+# contact_list_flutter
 
 A new Flutter project.
 
