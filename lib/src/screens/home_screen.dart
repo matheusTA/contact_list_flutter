@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:phone_book_flutter/src/helpers/contact_helper.dart';
 
-class Home extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  _HomeState createState() => _HomeState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeScreenState extends State<HomeScreen> {
   ContactHelper contactHelper = ContactHelper();
   List<Contact> contacts = List();
 
