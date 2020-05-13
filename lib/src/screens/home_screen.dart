@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:contact_list_flutter/src/screens/contact_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:contact_list_flutter/src/helpers/contact_helper.dart';
 
@@ -15,11 +16,33 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      contactHelper.getAllContacts().then((resp) {
+    _getAllContacts();
+  }
+
+  void _getAllContacts() {
+    contactHelper.getAllContacts().then((resp) {
+      setState(() {
         contacts = resp;
       });
     });
+  }
+
+  void _showContactPage({Contact contact}) async {
+    final recContact = await Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ContactScrenn(
+                  contact: contact,
+                )));
+
+    if (recContact != null) {
+      if (contact != null) {
+        await contactHelper.updateContact(recContact);
+      } else {
+        await contactHelper.saveContact(recContact);
+      }
+      _getAllContacts();
+    }
   }
 
   Widget _contactsNotFound() {
@@ -46,6 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _contactCard(BuildContext context, int index) {
     return GestureDetector(
+      onTap: () {
+        _showContactPage(contact: contacts[index]);
+      },
       child: Card(
         child: Padding(
           padding: EdgeInsets.all(10.0),
@@ -115,7 +141,9 @@ class _HomeScreenState extends State<HomeScreen> {
               })
           : _contactsNotFound(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          _showContactPage();
+        },
         child: Icon(Icons.add),
         backgroundColor: Colors.indigoAccent,
       ),
