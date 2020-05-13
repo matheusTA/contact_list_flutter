@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:contact_list_flutter/src/helpers/contact_helper.dart';
 
@@ -84,6 +84,18 @@ class _ContactScrennState extends State<ContactScrenn> {
           child: Column(
             children: <Widget>[
               GestureDetector(
+                onTap: () {
+                  ImagePicker.pickImage(source: ImageSource.camera)
+                      .then((file) {
+                    if (file == null) {
+                      return;
+                    } else {
+                      setState(() {
+                        _editedContact.img = file.path;
+                      });
+                    }
+                  });
+                },
                 child: Container(
                   width: 140.0,
                   height: 140.0,
