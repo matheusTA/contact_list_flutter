@@ -160,6 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
+                      fit: BoxFit.cover,
                       image: contacts[index].img != null
                           ? FileImage(File(contacts[index].img))
                           : AssetImage("images/person.png")),

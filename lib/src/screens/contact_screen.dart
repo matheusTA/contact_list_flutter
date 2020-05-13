@@ -102,6 +102,7 @@ class _ContactScrennState extends State<ContactScrenn> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
+                        fit: BoxFit.cover,
                         image: _editedContact.img != null
                             ? FileImage(File(_editedContact.img))
                             : AssetImage("images/person.png")),
