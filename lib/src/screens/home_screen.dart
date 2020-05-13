@@ -4,6 +4,8 @@ import 'package:contact_list_flutter/src/screens/contact_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:contact_list_flutter/src/helpers/contact_helper.dart';
 
+enum OrderOptions { orderAZ, orderZA }
+
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -25,6 +27,20 @@ class _HomeScreenState extends State<HomeScreen> {
         contacts = resp;
       });
     });
+  }
+
+  void _orderList(OrderOptions result) {
+    switch (result) {
+      case OrderOptions.orderAZ:
+        contacts.sort(
+            (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+        break;
+      case OrderOptions.orderZA:
+        contacts.sort(
+            (a, b) => b.name.toLowerCase().compareTo(a.name.toLowerCase()));
+        break;
+    }
+    setState(() {});
   }
 
   void _showContactPage({Contact contact}) async {
@@ -155,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      contacts[index].img ?? "",
+                      contacts[index].name ?? "",
                       style: TextStyle(
                           fontSize: 22.0, fontWeight: FontWeight.bold),
                     ),
@@ -191,6 +207,21 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: Colors.indigoAccent,
         centerTitle: true,
+        actions: <Widget>[
+          PopupMenuButton<OrderOptions>(
+            itemBuilder: (context) => <PopupMenuEntry<OrderOptions>>[
+              const PopupMenuItem<OrderOptions>(
+                child: Text("Ordenar de A-Z"),
+                value: OrderOptions.orderAZ,
+              ),
+              const PopupMenuItem<OrderOptions>(
+                child: Text("Ordenar de Z-A"),
+                value: OrderOptions.orderZA,
+              )
+            ],
+            onSelected: _orderList,
+          )
+        ],
       ),
       backgroundColor: Colors.white,
       body: contacts.length > 0
