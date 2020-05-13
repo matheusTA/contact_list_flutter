@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:url_launcher/url_launcher.dart';
 import 'package:contact_list_flutter/src/screens/contact_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:contact_list_flutter/src/helpers/contact_helper.dart';
@@ -45,6 +45,67 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  void _showOptions(BuildContext context, int index) {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return BottomSheet(
+              onClosing: () {},
+              builder: (context) {
+                return Container(
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: FlatButton(
+                            onPressed: () {
+                              launch("tel: ${contacts[index].phone}");
+                              Navigator.pop(context);
+                            },
+                            child: Text(
+                              "Ligar",
+                              style: TextStyle(
+                                  color: Colors.grey[600], fontSize: 20.0),
+                            )),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: FlatButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              _showContactPage(contact: contacts[index]);
+                            },
+                            child: Text(
+                              "Editar",
+                              style: TextStyle(
+                                  color: Colors.grey[600], fontSize: 20.0),
+                            )),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: FlatButton(
+                            onPressed: () {
+                              contactHelper.deleteContact(contacts[index].id);
+                              setState(() {
+                                contacts.removeAt(index);
+                                Navigator.pop(context);
+                              });
+                            },
+                            child: Text(
+                              "Excluir",
+                              style: TextStyle(
+                                  color: Colors.grey[600], fontSize: 20.0),
+                            )),
+                      ),
+                    ],
+                  ),
+                );
+              });
+        });
+  }
+
   Widget _contactsNotFound() {
     return Center(
       child: Column(
@@ -70,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _contactCard(BuildContext context, int index) {
     return GestureDetector(
       onTap: () {
-        _showContactPage(contact: contacts[index]);
+        _showOptions(context, index);
       },
       child: Card(
         child: Padding(
