@@ -17,6 +17,8 @@ class _ContactScrennState extends State<ContactScrenn> {
   final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
 
+  final _nameFocus = FocusNode();
+
   Contact _editedContact;
   bool _userEdited = false;
 
@@ -65,6 +67,7 @@ class _ContactScrennState extends State<ContactScrenn> {
             ),
             TextField(
               controller: _nameController,
+              focusNode: _nameFocus,
               decoration: InputDecoration(labelText: "Nome"),
               onChanged: (text) {
                 _userEdited = true;
@@ -99,7 +102,13 @@ class _ContactScrennState extends State<ContactScrenn> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          if (_editedContact.name.isNotEmpty && _editedContact.name != null) {
+            Navigator.pop(context, _editedContact);
+          } else {
+            FocusScope.of(context).requestFocus(_nameFocus);
+          }
+        },
         child: Icon(Icons.save),
         backgroundColor: Colors.indigoAccent,
       ),
