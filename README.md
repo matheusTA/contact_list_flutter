@@ -1,16 +1,46 @@
-# contact_list_flutter
+<h1 align="center">
+  <strong>Contact List</strong>
+</h1> 
 
-A new Flutter project.
+<p align="center">
+📞📒 Application that simulates a list of contacts and makes calls.
+</p> 
 
-## Getting Started
+## 🎨 Screens
 
-This project is a starting point for a Flutter application.
+<h3 align="center">
+  <img alt="Flutter app" 
+    src="./screenshots/screen1.PNG?raw=true" width="180px"/>
+  <img alt="Flutter App" 
+    src="./screenshots/screen2.PNG?raw=true" width="180px"/>
+    	<img alt="Flutter app" 
+    src="./screenshots/screen3.gif?raw=true" width="180px"/>
+</h3>
 
-A few resources to get you started if this is your first Flutter project:
+## ✅ Features
+   - Add contact
+   - Edit contact
+   - Delete contact
+   - Sort contact list
+   - Call Contact
+   - Take contact photo
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## 🧰 Tools
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Flutter](https://flutter.dev/docs)
+- [Sqflite](https://pub.dev/packages/sqflite)
+- [Url_launcher](https://pub.dev/packages/url_launcher)
+- [Image_picker](https://pub.dev/packages/image_picker)
+
+## 👩‍🏫 Getting Started
+
+- Cloning Project
+  - `git clone https://github.com/matheusTA/contact_list_flutter.git`
+  - `cd contact_list_flutter`
+- Install packages
+  - `flutter pub get`
+- [Run app](https://flutter.dev/docs/get-started/test-drive?tab=terminal)
+ 
+## 🙋‍♂️ Author
+
+* **Matheus Antonino** - [MatheusTA](https://github.com/matheusTA)
